@@ -2,6 +2,7 @@ package models;
 
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.Scanner;
 
 import javax.swing.JTree;
 
@@ -16,7 +17,10 @@ public class Manager {
 	private String simboloADerivar = "";
 	private String concat = "";
 
+	private Scanner sc;
+
 	public Manager(String simbolosNT, String simbolosT, String produccion, String simboloInicial) {
+		sc = new Scanner(System.in);
 		simbolosNoTerminales = new ArrayList<>();
 		simbolosTerminales = new ArrayList<>();
 		producciones = new ArrayList<>();
@@ -71,10 +75,10 @@ public class Manager {
 	 * Metodo de prueba
 	 */
 	public void imprimir() {
-		System.out.println(simbolosNoTerminales);
-		System.out.println(simbolosTerminales);
-		System.out.println(producciones);
-		System.out.println(simboloInicial);
+		System.out.println("Simbolos no terminales -> "+  simbolosNoTerminales);
+		System.out.println("Simbolos terminales -> " + simbolosTerminales);
+		System.out.println("Producciones -> " + producciones);
+		System.out.println("Simbolo incial -> "+ simboloInicial);
 	}
 
 	/*
@@ -153,13 +157,24 @@ public class Manager {
 
 
 	public static void main(String[] args) {
-		Manager m = new Manager("S,T,R", "a,b", "S->aT,T->bR,R->aT,T->b", "S");
+		Scanner scanner = new Scanner(System.in);
+		System.out.println("\"Ingrese los simbolos no terminales\"");
+		String inputSimbolosNT = scanner.nextLine();
+		System.out.println("\"Ingrese los simbolos terminales\"");
+		String simbolosTerminales = scanner.nextLine();
+		System.out.println("\"Ingrese las producciones\"");
+		String producciones = scanner.nextLine();
+		System.out.println("\"Ingrese el simbolo inicial\"");
+		String simboloInicial = scanner.nextLine();
+
+		Manager m = new Manager(inputSimbolosNT ,simbolosTerminales, producciones, simboloInicial);
+		//Manager m = new Manager("S,T,R", "a,b", "S->aT,T->bR,R->aT,T->b", "S");
 		//Manager m = new Manager("S", "a", "S->a,S->aS", "S");
 		m.imprimir();
 		m.añadiduraCompleta();
 		// System.out.println(m.perteneceONo("abab"));
-		System.out.println(m.derivacionHorizontal("abab"));
-		System.out.println(m.perteneceONo("abab"));
+		System.out.println("Derivación horizontal -> " + m.derivacionHorizontal("abab"));
+		System.out.println(m.perteneceONo("abab")?"->W1 ∈ L<- La palabra w1 pertenece al lenguaje generado por la gramática":"No pertenece");
 
 	}
 
