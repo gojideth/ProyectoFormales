@@ -166,6 +166,7 @@ public class Manager {
 		String producciones = scanner.nextLine();
 		System.out.println("\"Ingrese el simbolo inicial\"");
 		String simboloInicial = scanner.nextLine();
+		System.out.println("--------------------------------------------");
 
 		Manager m = new Manager(inputSimbolosNT ,simbolosTerminales, producciones, simboloInicial);
 		//Manager m = new Manager("S,T,R", "a,b", "S->aT,T->bR,R->aT,T->b", "S");
